@@ -17,7 +17,7 @@ var config = {
     backgroundColor: '#000000',
     pixelArt: true,
     //// Add all scenes below in the array
-    scene: [ lvl2, level1,  level3, level4 ]
+    scene: [ level1, lvl2,  level3, level4 ]
 };
 
 var game = new Phaser.Game(config);
