@@ -40,7 +40,7 @@
   <image source="../assets/31.png" width="320" height="1408"/>
  </tileset>
  <tileset firstgid="37675" name="key" tilewidth="32" tileheight="32" tilecount="1" columns="1">
-  <image source="../assets/key.png" width="32" height="32"/>
+  <image source="../assets/key.png" width="50" height="40"/>
  </tileset>
  <layer id="12" name="wallLayer" width="22" height="22">
   <data encoding="base64">
@@ -78,7 +78,7 @@
   </data>
  </layer>
  <objectgroup id="10" name="objectLayer">
-  <object id="1" name="key" x="623.747" y="336.776">
+  <object id="1" name="key1" x="623.747" y="336.776">
    <point/>
   </object>
   <object id="2" name="firstaid1" x="80.1776" y="393.332">

@@ -7,17 +7,17 @@ var config = {
     physics: {
         default: 'arcade',
         arcade: {
-            debug: true
+            debug: false
         }
     },
-    // scale: {
-    //     mode: Phaser.Scale.FIT,
-    //     autoCenter: Phaser.Scale.CENTER_BOTH
-    // },
+    scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH
+    },
     backgroundColor: '#000000',
     pixelArt: true,
     //// Add all scenes below in the array
-    scene: [ welcome, storyline, HTP, instruction, level1, lvl2,  level3, level4, gameover]
+    scene: [ welcome, storyline, HTP, instruction, level1, lvl2,  level3, level4, gameover,win,finalwin]
 };
 
 var game = new Phaser.Game(config);

@@ -6,12 +6,12 @@ class gameover extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('storyline', 'assets/storyline.jpg')
+    this.load.image('gameover', 'assets/gameover.jpg')
 
 }
 
 create () {
-    this.storyline = this.add.image(0, 0, 'storyline').setOrigin(0, 0);
+    this.storyline = this.add.image(0, 0, 'gameover').setOrigin(0, 0);
    
     console.log("gameover");
     window.life=1

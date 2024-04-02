@@ -16,7 +16,7 @@ class lvl2 extends Phaser.Scene {
             frameHeight: 64,
           });
 
-          this.load.spritesheet("enemy2", "character/villain_kaisa.png", {
+          this.load.spritesheet("enemy2", "character/villain_1.png", {
             frameWidth: 64,
             frameHeight: 64,
           });
@@ -33,6 +33,7 @@ class lvl2 extends Phaser.Scene {
         this.load.image("key2", "assets/key2.png");
         this.load.image("key4", "assets/key4.png");
         this.load.image("key3", "assets/key3.png");
+        // this.load.image("heart4", "assets/heart.png"); 
         
        
         
@@ -121,12 +122,33 @@ class lvl2 extends Phaser.Scene {
         frameRate: 5,
         repeat: -1,
       });
+
+      this.anims.create({
+        key: "enemy2-up",
+        frames: this.anims.generateFrameNumbers("enemy2", {
+          start: 105,
+          end: 112,
+        }),
+        frameRate: 5,
+        repeat: -1,
+      });
+  
+      this.anims.create({
+        key: "enemy2-down",
+        frames: this.anims.generateFrameNumbers("enemy2", {
+          start: 131,
+          end: 138,
+        }),
+        frameRate: 5,
+        repeat: -1,
+      });
   
       this.player = this.physics.add.sprite(320, 133, "main").play("main-down");
       window.player = this.player;
 
       this.player.body.setSize(this.player.width * 0.8, this.player.height * 0.8)
       this.player.setCollideWorldBounds(true) //dont go out the map
+
 
       // this.floorLayer.setCollisionByExclusion(-1, true);
       this.decoLayer.setCollisionByExclusion(-1, true);
@@ -146,28 +168,41 @@ class lvl2 extends Phaser.Scene {
 
      this.cameras.main.startFollow(this.player);
 
+     
+
      this.enemy2 = this.physics.add.sprite(enemy2.x, 545, "enemy2");
      this.key1 = this.physics.add.sprite(key1.x, key1.y, "key1");
      this.key2 = this.physics.add.sprite(key2.x, key2.y, "key2");
      this.key3 = this.physics.add.sprite(key3.x, key3.y, "key3");
      this.key4 = this.physics.add.sprite(key4.x, key4.y, "key4");
 
+     this.tweens.add({
+      targets: this.enemy2,
+      y: 200,
+      flipY: false,
+      yoyo: true,
+      duration: 4000,
+      repeat: -1,
+      onYoyo: () => {
+          this.enemy2.play ("enemy2-down")
+        
+      },
+      onRepeat: () => {
+          this.enemy2.play ("enemy2-up")
+      },
+     })
+
+     
+
+    //  this.heart4 = this.add.sprite(945, 13, "heart4");
+    //  this.heart4.setDepth(1); // Set the depth to 1 (or higher if needed) to render it on top
+
+
      this.physics.add.overlap(this.player, this.enemy2, this.hitEnemy2, null, this);
      this.physics.add.overlap(this.player, this.key1, this.hitKey, null, this);
      this.physics.add.overlap(this.player, this.key2, this.hitKey, null, this);
      this.physics.add.overlap(this.player, this.key3, this.hitKey, null, this);
      this.physics.add.overlap(this.player, this.key4, this.hitKey, null, this);
-
-
-
-     this.tweens.add({
-      targets: this.enemy2,
-      y: 200,
-      flipX: true,
-      yoyo: true,
-      duration: 3000,
-      repeat: -1
-    })
      
  
 
@@ -177,6 +212,17 @@ class lvl2 extends Phaser.Scene {
     //    console.log("49 pressed, jump to level 1");
     //        this.scene.start("level1");
     //    }, this );
+
+    var level3down = this.input.keyboard.addKey(51);
+
+     level3down.on(
+      "down",
+      function(){
+        console.log("51 pressed,jump to lvl 3");
+        this.scene.start("level3");
+      },
+      this
+     );
     
 
     
@@ -233,6 +279,19 @@ class lvl2 extends Phaser.Scene {
     console.log("Ouch!!!");
     this.cameras.main.shake(200);
     // return false;
+    window.life--
+    player.x=player.x-80
+    if(window.life < 1){
+      this.scene.start("gameover")
+    }
+  //    // Hide hearts when hit
+  //    if (this.heart3.visible) {
+  //     this.heart3.visible = false;
+  // } else if (this.heart2.visible) {
+  //     this.heart2.visible = false;
+  // } else if (this.heart1.visible) {
+  //     this.heart1.visible = false;
+  // }
   }
 
   hitKey(player, item) {
